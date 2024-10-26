@@ -24,14 +24,15 @@
         <circle cx="100" cy="100" r="20" fill="yellow" />
 
         <!-- Pétalos rojos -->
-        <ellipse cx="100" cy="40" rx="30" ry="15" fill="red" />  <!-- Pétalo superior -->
-        <ellipse cx="100" cy="160" rx="30" ry="15" fill="red" /> <!-- Pétalo inferior -->
-        <ellipse cx="40" cy="100" rx="15" ry="30" fill="red" />  <!-- Pétalo izquierdo -->
-        <ellipse cx="160" cy="100" rx="15" ry="30" fill="red" /> <!-- Pétalo derecho -->
-        <ellipse cx="70" cy="70" rx="20" ry="10" fill="red" />   <!-- Pétalo superior izquierdo -->
-        <ellipse cx="130" cy="70" rx="20" ry="10" fill="red" />  <!-- Pétalo superior derecho -->
-        <ellipse cx="70" cy="130" rx="20" ry="10" fill="red" />  <!-- Pétalo inferior izquierdo -->
-        <ellipse cx="130" cy="130" rx="20" ry="10" fill="red" /> <!-- Pétalo inferior derecho -->
+        <ellipse cx="100" cy="40" rx="30" ry="15" fill="red" transform="rotate(0 100 100)" />    <!-- Superior -->
+        <ellipse cx="160" cy="100" rx="15" ry="30" fill="red" transform="rotate(90 100 100)" />  <!-- Derecho -->
+        <ellipse cx="100" cy="160" rx="30" ry="15" fill="red" transform="rotate(180 100 100)" />  <!-- Inferior -->
+        <ellipse cx="40" cy="100" rx="15" ry="30" fill="red" transform="rotate(-90 100 100)" />   <!-- Izquierdo -->
+        
+        <ellipse cx="70" cy="70" rx="20" ry="10" fill="red" transform="rotate(-45 100 100)" />   <!-- Superior Izquierdo -->
+        <ellipse cx="130" cy="70" rx="20" ry="10" fill="red" transform="rotate(45 100 100)" />    <!-- Superior Derecho -->
+        <ellipse cx="130" cy="130" rx="20" ry="10" fill="red" transform="rotate(135 100 100)" />  <!-- Inferior Derecho -->
+        <ellipse cx="70" cy="130" rx="20" ry="10" fill="red" transform="rotate(-135 100 100)" />   <!-- Inferior Izquierdo -->
     </svg>
 </body>
 </html>
