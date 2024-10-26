@@ -49,14 +49,14 @@
             fill('red');
             for (let i = 0; i < 8; i++) {
                 let angle = TWO_PI / 8 * i;
-                let petalX = x + cos(angle) * 60; // Increased distance from center
-                let petalY = y + sin(angle) * 60; // Increased distance from center
+                let petalX = x + cos(angle) * 80; // Increased distance from center
+                let petalY = y + sin(angle) * 80; // Increased distance from center
 
-                // Create a more rose-like petal shape
+                // Create a more rose-like petal shape, pointed inwards
                 beginShape();
                 vertex(petalX, petalY);
-                bezierVertex(petalX + 50 * cos(angle - PI / 4), petalY + 50 * sin(angle - PI / 4),
-                             petalX + 50 * cos(angle + PI / 4), petalY + 50 * sin(angle + PI / 4),
+                bezierVertex(petalX - 60 * cos(angle - PI / 4), petalY - 60 * sin(angle - PI / 4),
+                             petalX - 60 * cos(angle + PI / 4), petalY - 60 * sin(angle + PI / 4),
                              petalX, petalY);
                 endShape(CLOSE);
             }
@@ -64,21 +64,21 @@
             // Draw additional petals rotated by 90 degrees
             for (let i = 0; i < 3; i++) {
                 let angle = TWO_PI / 8 * (i + 8); // Rotate by 90 degrees
-                let petalX = x + cos(angle) * 60; // Increased distance from center
-                let petalY = y + sin(angle) * 60; // Increased distance from center
+                let petalX = x + cos(angle) * 80; // Increased distance from center
+                let petalY = y + sin(angle) * 80; // Increased distance from center
 
-                // Create a more rose-like petal shape
+                // Create a more rose-like petal shape, pointed inwards
                 beginShape();
                 vertex(petalX, petalY);
-                bezierVertex(petalX + 50 * cos(angle - PI / 4), petalY + 50 * sin(angle - PI / 4),
-                             petalX + 50 * cos(angle + PI / 4), petalY + 50 * sin(angle + PI / 4),
+                bezierVertex(petalX - 60 * cos(angle - PI / 4), petalY - 60 * sin(angle - PI / 4),
+                             petalX - 60 * cos(angle + PI / 4), petalY - 60 * sin(angle + PI / 4),
                              petalX, petalY);
                 endShape(CLOSE);
             }
 
             // Draw center of the rose
             fill('yellow');
-            ellipse(x, y, 100, 100); // Increased center size for better proportion
+            ellipse(x, y, 120, 120); // Increased center size for better proportion
         }
 
         document.getElementById('careculoButton').addEventListener('click', function() {
