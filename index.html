@@ -1,38 +1,69 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flor SVG</title>
+    <title>Rose Flower with p5.js</title>
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            margin: 0;
-            background-color: white; /* Fondo blanco */
+            background-color: #f0f0f0;
         }
-        .flower {
-            width: 200px;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff4500; /* OrangeRed color */
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
-    <svg class="flower" viewBox="0 0 200 200">
-        <!-- Centro amarillo -->
-        <circle cx="100" cy="100" r="20" fill="yellow" />
 
-        <!-- Pétalos rojos -->
-        <ellipse cx="100" cy="40" rx="30" ry="15" fill="red" transform="rotate(0 100 100)" />    <!-- Superior -->
-        <ellipse cx="160" cy="100" rx="15" ry="30" fill="red" transform="rotate(90 100 100)" />  <!-- Derecho -->
-        <ellipse cx="100" cy="160" rx="30" ry="15" fill="red" transform="rotate(180 100 100)" />  <!-- Inferior -->
-        <ellipse cx="40" cy="100" rx="15" ry="30" fill="red" transform="rotate(-90 100 100)" />   <!-- Izquierdo -->
-        
-        <ellipse cx="70" cy="70" rx="20" ry="10" fill="red" transform="rotate(-45 100 100)" />   <!-- Superior Izquierdo -->
-        <ellipse cx="130" cy="70" rx="20" ry="10" fill="red" transform="rotate(45 100 100)" />    <!-- Superior Derecho -->
-        <ellipse cx="130" cy="130" rx="20" ry="10" fill="red" transform="rotate(135 100 100)" />  <!-- Inferior Derecho -->
-        <ellipse cx="70" cy="130" rx="20" ry="10" fill="red" transform="rotate(-135 100 100)" />   <!-- Inferior Izquierdo -->
-    </svg>
+    <button id="roseButton">Draw Rose</button>
+    <div id="roseCanvas"></div>
+
+    <script>
+        function setup() {
+            let canvas = createCanvas(400, 400);
+            canvas.parent('roseCanvas');
+            noLoop(); // Prevents draw from looping
+            drawRose(width / 2, height / 2); // Draw the rose on setup
+        }
+
+        function drawRose(x, y) {
+            background(255);
+            noStroke();
+            fill('red');
+
+            // Draw petals
+            for (let i = 0; i < 8; i++) {
+                let angle = TWO_PI / 8 * i;
+                let petalX = x + cos(angle) * 50;
+                let petalY = y + sin(angle) * 50;
+                ellipse(petalX, petalY, 80, 150);
+            }
+
+            // Draw center of the rose
+            fill('yellow');
+            ellipse(x, y, 60, 60);
+        }
+
+        document.getElementById('roseButton').addEventListener('click', function() {
+            drawRose(width / 2, height / 2); // Redraw the rose on button click
+        });
+
+    </script>
+
 </body>
 </html>
