@@ -44,14 +44,36 @@
         function drawRose(x, y) {
             background(255);
             noStroke();
-            fill('red');
 
-            // Draw petals
+            // Draw petals (8 original + 3 rotated)
+            fill('red');
             for (let i = 0; i < 8; i++) {
                 let angle = TWO_PI / 8 * i;
-                let petalX = x + cos(angle) * 50;
-                let petalY = y + sin(angle) * 50;
-                ellipse(petalX, petalY, 80, 150);
+                let petalX = x + cos(angle) * 30;
+                let petalY = y + sin(angle) * 30;
+
+                // Create a more rose-like petal shape
+                beginShape();
+                vertex(petalX, petalY);
+                bezierVertex(petalX + 20 * cos(angle - PI / 4), petalY + 20 * sin(angle - PI / 4),
+                             petalX + 20 * cos(angle + PI / 4), petalY + 20 * sin(angle + PI / 4),
+                             petalX, petalY);
+                endShape(CLOSE);
+            }
+
+            // Draw additional petals rotated by 90 degrees
+            for (let i = 0; i < 3; i++) {
+                let angle = TWO_PI / 8 * (i + 8); // Rotate by 90 degrees
+                let petalX = x + cos(angle) * 30;
+                let petalY = y + sin(angle) * 30;
+
+                // Create a more rose-like petal shape
+                beginShape();
+                vertex(petalX, petalY);
+                bezierVertex(petalX + 20 * cos(angle - PI / 4), petalY + 20 * sin(angle - PI / 4),
+                             petalX + 20 * cos(angle + PI / 4), petalY + 20 * sin(angle + PI / 4),
+                             petalX, petalY);
+                endShape(CLOSE);
             }
 
             // Draw center of the rose
