@@ -21,6 +21,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-bottom: 20px; /* Add some space between button and canvas */
         }
         button:hover {
             background-color: #ff4500; /* OrangeRed color */
@@ -30,7 +31,7 @@
 </head>
 <body>
 
-    <button id="roseButton">Draw Rose</button>
+    <button id="careculoButton">careculo</button>
     <div id="roseCanvas"></div>
 
     <script>
@@ -38,7 +39,6 @@
             let canvas = createCanvas(400, 400);
             canvas.parent('roseCanvas');
             noLoop(); // Prevents draw from looping
-            drawRose(width / 2, height / 2); // Draw the rose on setup
         }
 
         function drawRose(x, y) {
@@ -59,8 +59,8 @@
             ellipse(x, y, 60, 60);
         }
 
-        document.getElementById('roseButton').addEventListener('click', function() {
-            drawRose(width / 2, height / 2); // Redraw the rose on button click
+        document.getElementById('careculoButton').addEventListener('click', function() {
+            drawRose(width / 2, height / 2); // Draw the rose on button click
         });
 
     </script>
