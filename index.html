@@ -47,10 +47,11 @@
 
             // Draw petals (8 original + 3 rotated)
             fill('red');
+            let petalDistance = 120; // Closer distance from center
             for (let i = 0; i < 8; i++) {
                 let angle = TWO_PI / 8 * i;
-                let petalX = x + cos(angle) * 160; // Increased distance from center
-                let petalY = y + sin(angle) * 160; // Increased distance from center
+                let petalX = x + cos(angle) * petalDistance; // Adjusted distance from center
+                let petalY = y + sin(angle) * petalDistance; // Adjusted distance from center
 
                 // Create a more rose-like petal shape, pointed inwards
                 beginShape();
@@ -64,8 +65,8 @@
             // Draw additional petals rotated by 90 degrees
             for (let i = 0; i < 3; i++) {
                 let angle = TWO_PI / 8 * (i + 8); // Rotate by 90 degrees
-                let petalX = x + cos(angle) * 160; // Increased distance from center
-                let petalY = y + sin(angle) * 160; // Increased distance from center
+                let petalX = x + cos(angle) * petalDistance; // Adjusted distance from center
+                let petalY = y + sin(angle) * petalDistance; // Adjusted distance from center
 
                 // Create a more rose-like petal shape, pointed inwards
                 beginShape();
@@ -78,7 +79,7 @@
 
             // Draw center of the rose
             fill('yellow');
-            ellipse(x, y, 160, 160); // Increased center size for better proportion
+            ellipse(x, y, 140, 140); // Decreased center size for better proportion
         }
 
         document.getElementById('careculoButton').addEventListener('click', function() {
