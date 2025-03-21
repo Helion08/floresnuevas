@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rose Flower with p5.js</title>
+    <title>Sunflower with p5.js</title>
     <style>
         body {
             display: flex;
@@ -16,74 +16,103 @@
         button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #ff6347; /* Tomato color */
+            background-color: #ffb400; /* Sunflower yellow */
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-bottom: 20px; /* Add some space between button and canvas */
+            margin-bottom: 20px;
         }
         button:hover {
-            background-color: #ff4500; /* OrangeRed color */
+            background-color: #ff9900;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
 
-    <button id="careculoButton">careculo</button>
-    <div id="roseCanvas"></div>
+    <button id="drawButton">Generar Girasol</button>
+    <div id="canvasContainer"></div>
 
     <script>
         function setup() {
-            let canvas = createCanvas(400, 400);
-            canvas.parent('roseCanvas');
-            noLoop(); // Prevents draw from looping
+            let canvas = createCanvas(400, 500);
+            canvas.parent('canvasContainer');
+            noLoop();
+            drawSunflower(width / 2, height / 2);
         }
 
-        function drawRose(x, y) {
-            background(255);
+        function drawSunflower(x, y) {
+            background(240);
+            drawStem(x, y + 100);
+            drawPetals(x, y);
+            drawCenter(x, y);
+        }
+
+        function drawStem(x, y) {
+            stroke(34, 139, 34);
+            strokeWeight(10);
+            line(x, y, x, height);
+
+            // Dibujar hojas
+            fill(34, 139, 34);
             noStroke();
-
-            // Draw petals (8 original + 3 rotated)
-            fill('red');
-            let petalDistance = 120; // Distance from center
-            for (let i = 0; i < 8; i++) {
-                let angle = TWO_PI / 8 * i;
-                let petalX = x + cos(angle) * petalDistance; // Distance from center
-                let petalY = y + sin(angle) * petalDistance; // Distance from center
-
-                // Create a more rose-like petal shape, pointed inwards
-                beginShape();
-                vertex(petalX, petalY);
-                bezierVertex(petalX - 140 * cos(angle - PI / 4), petalY - 140 * sin(angle - PI / 4), // Increased control point size
-                             petalX - 140 * cos(angle + PI / 4), petalY - 140 * sin(angle + PI / 4), // Increased control point size
-                             petalX, petalY);
-                endShape(CLOSE);
-            }
-
-            // Draw additional petals rotated by 90 degrees
-            for (let i = 0; i < 3; i++) {
-                let angle = TWO_PI / 8 * (i + 8); // Rotate by 90 degrees
-                let petalX = x + cos(angle) * petalDistance; // Distance from center
-                let petalY = y + sin(angle) * petalDistance; // Distance from center
-
-                // Create a more rose-like petal shape, pointed inwards
-                beginShape();
-                vertex(petalX, petalY);
-                bezierVertex(petalX - 140 * cos(angle - PI / 4), petalY - 140 * sin(angle - PI / 4), // Increased control point size
-                             petalX - 140 * cos(angle + PI / 4), petalY - 140 * sin(angle + PI / 4), // Increased control point size
-                             petalX, petalY);
-                endShape(CLOSE);
-            }
-
-            // Draw center of the rose
-            fill('yellow');
-            ellipse(x, y, 140, 140); // Center size remains the same
+            drawLeaf(x - 30, y + 80, -1);
+            drawLeaf(x + 30, y + 140, 1);
         }
 
-        document.getElementById('careculoButton').addEventListener('click', function() {
-            drawRose(width / 2, height / 2); // Draw the rose on button click
+        function drawLeaf(x, y, direction) {
+            push();
+            translate(x, y);
+            scale(direction, 1);
+            beginShape();
+            vertex(0, 0);
+            bezierVertex(-40, -20, -60, 20, 0, 40);
+            bezierVertex(60, 20, 40, -20, 0, 0);
+            endShape(CLOSE);
+            pop();
+        }
+
+        function drawPetals(x, y) {
+            fill(255, 204, 0);
+            stroke(230, 160, 0);
+            strokeWeight(2);
+
+            let petalCount = 20;
+            let petalLength = 70;
+            let petalWidth = 30;
+
+            for (let i = 0; i < petalCount; i++) {
+                let angle = TWO_PI / petalCount * i;
+                let petalX = x + cos(angle) * 40;
+                let petalY = y + sin(angle) * 40;
+
+                push();
+                translate(petalX, petalY);
+                rotate(angle);
+                ellipse(0, 0, petalWidth, petalLength);
+                pop();
+            }
+        }
+
+        function drawCenter(x, y) {
+            fill(90, 60, 30);
+            noStroke();
+            ellipse(x, y, 80, 80);
+
+            // Efecto de textura con puntos aleatorios
+            fill(50, 30, 10);
+            for (let i = 0; i < 300; i++) {
+                let angle = random(TWO_PI);
+                let radius = random(35);
+                let px = x + cos(angle) * radius;
+                let py = y + sin(angle) * radius;
+                ellipse(px, py, 3, 3);
+            }
+        }
+
+        document.getElementById('drawButton').addEventListener('click', function() {
+            drawSunflower(width / 2, height / 2);
         });
 
     </script>
