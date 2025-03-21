@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunflower with p5.js</title>
+    <title>Girasoles Procedurales</title>
     <style>
         body {
             display: flex;
@@ -11,12 +11,12 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #ffb400; /* Sunflower yellow */
+            background-color: #FFA500; /* Naranja */
             color: white;
             border: none;
             border-radius: 5px;
@@ -24,97 +24,71 @@
             margin-bottom: 20px;
         }
         button:hover {
-            background-color: #ff9900;
+            background-color: #FF8C00; /* Naranja oscuro */
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
 
-    <button id="drawButton">Generar Girasol</button>
-    <div id="canvasContainer"></div>
+    <button id="girasolButton">Para mi Chichi</button>
+    <div id="sunflowerCanvas"></div>
 
     <script>
         function setup() {
             let canvas = createCanvas(400, 500);
-            canvas.parent('canvasContainer');
+            canvas.parent('sunflowerCanvas');
             noLoop();
-            drawSunflower(width / 2, height / 2);
         }
 
-        function drawSunflower(x, y) {
-            background(240);
-            drawStem(x, y + 100);
-            drawPetals(x, y);
-            drawCenter(x, y);
-        }
-
-        function drawStem(x, y) {
-            stroke(34, 139, 34);
-            strokeWeight(10);
-            line(x, y, x, height);
-
-            // Dibujar hojas
-            fill(34, 139, 34);
+        function drawSunflower(x, y, size) {
+            // Tallo
+            stroke(107, 142, 35);
+            strokeWeight(size / 15);
+            line(x, y, x, y + size * 2);
+            
+            // Hojas
             noStroke();
-            drawLeaf(x - 30, y + 80, -1);
-            drawLeaf(x + 30, y + 140, 1);
-        }
+            fill(34, 139, 34);
+            ellipse(x - size / 4, y + size, size / 2, size / 3);
+            ellipse(x + size / 4, y + size * 1.3, size / 2, size / 3);
+            
 
-        function drawLeaf(x, y, direction) {
-            push();
-            translate(x, y);
-            scale(direction, 1);
-            beginShape();
-            vertex(0, 0);
-            bezierVertex(-40, -20, -60, 20, 0, 40);
-            bezierVertex(60, 20, 40, -20, 0, 0);
-            endShape(CLOSE);
-            pop();
-        }
-
-        function drawPetals(x, y) {
+            
+            // Pétalos
             fill(255, 204, 0);
-            stroke(230, 160, 0);
-            strokeWeight(2);
-
-            let petalCount = 20;
-            let petalLength = 70;
-            let petalWidth = 30;
-
-            for (let i = 0; i < petalCount; i++) {
-                let angle = TWO_PI / petalCount * i;
-                let petalX = x + cos(angle) * 40;
-                let petalY = y + sin(angle) * 40;
-
+            for (let i = 0; i < 12; i++) {
+                let angle = (TWO_PI / 12) * i;
+                let petalX = x + cos(angle) * size * 0.5;
+                let petalY = y + sin(angle) * size * 0.5;
                 push();
                 translate(petalX, petalY);
-                rotate(angle);
-                ellipse(0, 0, petalWidth, petalLength);
+                rotate(angle + PI / 2);
+                ellipse(0, 0, size / 2.5, size);
                 pop();
             }
+            // Centro del girasol (semillas)
+            fill(102, 51, 0);
+            ellipse(x, y, size, size);
         }
-
-        function drawCenter(x, y) {
-            fill(90, 60, 30);
-            noStroke();
-            ellipse(x, y, 80, 80);
-
-            // Efecto de textura con puntos aleatorios
-            fill(50, 30, 10);
-            for (let i = 0; i < 300; i++) {
-                let angle = random(TWO_PI);
-                let radius = random(35);
-                let px = x + cos(angle) * radius;
-                let py = y + sin(angle) * radius;
-                ellipse(px, py, 3, 3);
-            }
+        
+        function drawSunflowers() {
+            background(255);
+            let sunflowerData = [
+                { x: 200, y: 200, size: 80 },
+                { x: 100, y: 300, size: 50 },
+                { x: 300, y: 320, size: 60 }
+            ];
+            
+            sunflowerData.forEach(s => {
+                drawSunflower(s.x, s.y, s.size);
+            });
         }
-
-        document.getElementById('drawButton').addEventListener('click', function() {
-            drawSunflower(width / 2, height / 2);
+        
+        document.getElementById('girasolButton').addEventListener('click', function() {
+            drawSunflowers();
+            setInterval(drawSunflowers, 5000);
         });
-
     </script>
 
 </body>
